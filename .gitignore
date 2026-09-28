@@ -1,0 +1,14 @@
+# Reportes generados por la skill (mapa sensible de PII y brechas) — nunca versionar
+.ldpddp/
+
+# Extensión local privada (adaptaciones a tu entorno) — no forma parte del repo público
+references/local.md
+
+# Configuración local de Claude Code
+.claude/
+.claude/settings.local.json
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
