@@ -50,14 +50,16 @@ automáticamente — son un mapa sensible de dónde vive el PII y dónde están 
 
 ```
 ldpddp/
-├── SKILL.md                    # orquestador (modos, procedimiento, reglas)
-├── references/
+├── SKILL.md                    # adaptador Claude Code + orquestador (modos, procedimiento, reglas)
+├── references/                 # ← núcleo agnóstico (sirve a cualquier agente)
 │   ├── ley-21719-marco.md      # ★ las 12 áreas de control + articulado + severidad
 │   ├── deteccion-datos.md      # heurísticas PII/sensibles (diccionarios ES/EN, RUT/RUN)
 │   ├── controles-tecnicos.md   # patrones de remediación
 │   ├── reportes.md             # plantillas de salida (RAT, COMPLIANCE_REPORT, BACKLOG, scorecard)
 │   └── local.example.md        # plantilla para adaptar la skill a tu entorno (opcional)
 ├── assets/plantillas/          # documentos fill-in (RAT, EIPD, brecha, consentimiento, ARCOP)
+├── adapters/                   # ← activación en otros harnesses (mismo núcleo)
+│   └── agents-md/              # AGENTS.md: Codex, Cursor, Aider, Gemini CLI, Zed, VS Code…
 ├── LICENSE
 └── README.md
 ```
@@ -68,6 +70,18 @@ ldpddp/
 pipeline, o activar agentes/gates propios? Crea `references/local.md` con tus reglas: la skill lo detecta
 en el Paso 0 y lo aplica. Ese archivo está en `.gitignore`, así que tus adaptaciones **no se publican** y
 **sobreviven a los `git pull`**. Copia `references/local.example.md` como punto de partida.
+
+## Uso en otros agentes (más allá de Claude Code)
+
+El núcleo (`references/` + `assets/`) es markdown agnóstico; solo cambia la capa de activación. En
+[`adapters/`](adapters/) hay adaptadores delgados que apuntan al mismo núcleo:
+
+- **AGENTS.md** ([`adapters/agents-md/`](adapters/agents-md/)) — el estándar universal de contexto para
+  agentes, que leen Codex, Cursor, Aider, Gemini CLI, Zed, VS Code, Claude Code y 20+ herramientas. Pega
+  la sección en el `AGENTS.md` de tu proyecto y (opcional) copia el núcleo a `docs/ldpddp/` para la
+  auditoría completa.
+
+¿Quieres otro (Cursor, Copilot, Windsurf, modo portátil)? Sigue el patrón de `adapters/` — PRs bienvenidos.
 
 ## Alcance y límites
 
